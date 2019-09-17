@@ -3,13 +3,50 @@ def call(Map pipelineParams) {
     pipeline {
         agent any
         stages {
-          
+            stage('checkout git') {
+                steps {
+                    // git branch: pipelineParams.branch, credentialsId: 'GitCredentials', url: pipelineParams.scmUrl
+                    sh 'echo git'
+                }
+            }
 
             stage('build') {
                 steps {
-                    sh 'echo 999999'
+                    //sh 'mvn clean package -DskipTests=true'
+                    sh 'echo "mvn clean package -DskipTests=true"'
                 }
             }
-        }
-      }
+
+            stage ('test') {
+                steps {
+                    parallel (
+                        //"unit tests": { sh 'mvn test' },
+                        //"integration tests": { sh 'mvn integration-test' }
+                        sh 'echo parallel'
+                    )
+                }
+            }
+
+            stage('deploy developmentServer'){
+                steps {
+                    //deploy(pipelineParams.developmentServer, pipelineParams.serverPort)
+                    sh 'echo deploy developmentServer'
+                }
+            }
+
+            stage('deploy staging'){
+                steps {
+                    //deploy(pipelineParams.stagingServer, pipelineParams.serverPort)
+                    sh 'echo deploy staging'
+                }
+            }
+
+            stage('deploy production'){
+                steps {
+                    //deploy(pipelineParams.productionServer, pipelineParams.serverPort)
+                    sh 'echo deploy production'
+                }
+            }
+        }        
+    }
 }
