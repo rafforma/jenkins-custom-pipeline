@@ -3,7 +3,8 @@ def call(Map pipelineParams) {
     pipeline {
         agent any
 	parameters {
-            string(defaultValue: 'blank', description: '', name: 'gitlabActionType')
+            string(defaultValue: 'blank', description: '', name: 'gitlabActionType')		
+	    string(defaultValue: 'blank', description: '', name: 'gitlabBranch')
     	}
         stages {
             stage('checkout git') {
