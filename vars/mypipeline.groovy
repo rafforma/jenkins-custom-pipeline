@@ -6,7 +6,7 @@ def call(Map pipelineParams) {
             stage('checkout git') {
                 steps {
                     // git branch: pipelineParams.branch, credentialsId: 'GitCredentials', url: pipelineParams.scmUrl
-                    sh "./prepare_vars.sh"
+                    sh "/home/raffaele/prepare_vars.sh"
                 }
             }
 
