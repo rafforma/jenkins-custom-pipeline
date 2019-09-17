@@ -6,6 +6,7 @@ def call(Map pipelineParams) {
             stage('checkout git') {
                 steps {
                     // git branch: pipelineParams.branch, credentialsId: 'GitCredentials', url: pipelineParams.scmUrl                   
+		    echo "checkout"
                 }
             }
 	   stage('environment setup') {
@@ -16,7 +17,7 @@ def call(Map pipelineParams) {
             stage('build') {
                 steps {
                     //sh 'mvn package -Dmaven.test.skip=true -DgitlabBranch=${MygitlabBranch} -Drevision=${revision}'
-                
+                	echo "build"
                 }
             }
 
@@ -24,6 +25,7 @@ def call(Map pipelineParams) {
 		
                 steps {
                     //sh 'mvn test -Dmaven.test.failure.ignore=false -DgitlabBranch=${MygitlabBranch} -Drevision=${revision}'
+			echo "test"
                 }
             }
 
@@ -32,6 +34,7 @@ def call(Map pipelineParams) {
                 steps {
                 
                    // sh 'mvn sonar:sonar -Dmaven.test.failure.ignore=true -DgitlabBranch=${MygitlabBranch} -Drevision=${revision} -Dsonar.projectName=${My_Job} -Dsonar.projectKey=${My_Job} -Dsonar.projectVersion=${revision}'
+			echo "sonar"
                 }
             }
 		
@@ -44,6 +47,7 @@ def call(Map pipelineParams) {
 			sudo ansible-playbook /etc/ansible/playbooks/openshift_deploy/fortify_report.yml --extra-vars "workspace=${Workspace_Home} project=${My_Job} tag=${revision} gitlabgroup=${git_prj_path}"
 			fi		   
 		   """*/
+			echo "fortify"
 	 	}
 	   }
 
