@@ -9,7 +9,8 @@ def call(Map pipelineParams) {
         stages {
             stage('checkout git') {
                 steps {
-                    git branch: pipelineParams.branch, credentialsId: 'GitCredentials', url: pipelineParams.scmUrl                   
+                   //  git branch: gitlabBranch, credentialsId: 'GitCredentials', url: pipelineParams.scmUrl                   
+		       git branch: gitlabBranch, url: pipelineParams.scmUrl                   
                 }
             }
 	   stage('environment setup') {
