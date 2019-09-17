@@ -6,7 +6,7 @@ def call(Map pipelineParams) {
             stage('checkout git') {
                 steps {
                     // git branch: pipelineParams.branch, credentialsId: 'GitCredentials', url: pipelineParams.scmUrl
-                    bash ''' 
+                    bash """ 
                         echo My_Job=${JOB_NAME} > ${HOME}/jobs/${JOB_NAME}/${JOB_NAME}.properties
                         echo Workspace_Home=${HOME}/workspace/${JOB_NAME} >> ${HOME}/jobs/${JOB_NAME}/${JOB_NAME}.properties
                         echo MygitlabBranch=${gitlabBranch} >> ${HOME}/jobs/${JOB_NAME}/${JOB_NAME}.properties
@@ -46,7 +46,7 @@ def call(Map pipelineParams) {
                             echo Base_Dir=null >> ${HOME}/jobs/${JOB_NAME}/${JOB_NAME}.properties
                             echo PaaS=null >> ${HOME}/jobs/${JOB_NAME}/${JOB_NAME}.properties
                         fi                    
-                    ''' 
+                    """ 
                 }
             }
 
