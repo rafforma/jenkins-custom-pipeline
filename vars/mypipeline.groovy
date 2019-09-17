@@ -2,6 +2,9 @@ def call(Map pipelineParams) {
 
     pipeline {
         agent any
+	parameters {
+            string(defaultValue: true, description: '', name: 'gitlabActionType')
+    	}
         stages {
             stage('checkout git') {
                 steps {
