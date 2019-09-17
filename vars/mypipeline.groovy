@@ -19,11 +19,7 @@ def call(Map pipelineParams) {
 
             stage ('test') {
                 steps {
-                    parallel (
-                        //"unit tests": { sh 'mvn test' },
-                        //"integration tests": { sh 'mvn integration-test' }
-                        sh 'echo parallel'
-                    )
+                    sh 'echo parallel test'
                 }
             }
 
